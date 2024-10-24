@@ -1,0 +1,86 @@
+﻿<UserControl x:Class="SportsAnalysisSystem.Views.IndividualMatchView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SportsAnalysisSystem.Views"
+             mc:Ignorable="d"
+             Background="LightGray"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="1.5*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Column="0" FontSize="30" HorizontalAlignment="Center" Margin="0 0 0 0">
+            <Run Text="{Binding HomeTeam}"/>
+            </TextBlock>
+            <Grid Grid.Column="1" HorizontalAlignment="Center">
+                <TextBlock Text="{Binding Score}" FontSize="30" HorizontalAlignment="Center"/>
+            </Grid>
+            <Grid Grid.Column="2" HorizontalAlignment="Center">
+                <TextBlock Text="{Binding AwayTeam}" FontSize="30" HorizontalAlignment="Center"/>
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="1.5*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0" Margin="10 0 0 0">
+                <StackPanel>
+                    <TextBlock FontSize="18" Margin="0 0 0 10">
+                    <Run Text="Location: "/>
+                    <Run Text="{Binding Location}"/>
+                    </TextBlock>
+
+                    <TextBlock FontSize="18" Margin="0 0 0 10">
+                    <Run Text="Date: "/>
+                    <Run Text="{Binding MatchDate}"/>
+                    </TextBlock>
+
+                    <TextBlock FontSize="18" Margin="0 0 0 10">
+                    <Run Text="MoTM: "/>
+                    <Run Text="{Binding ManOfTheMatch}"/>
+                    </TextBlock>
+                    
+                    
+                </StackPanel>
+            </Grid>
+
+            <ListView ItemsSource="{Binding MatchEvents}" Grid.Column="1" Margin="20 0 0 0">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Minute" DisplayMemberBinding="{Binding Minute}" Width="100"/>
+                        <GridViewColumn Header="Event" DisplayMemberBinding="{Binding EventMatch}" Width="100"/>
+                        <GridViewColumn Header="Player" DisplayMemberBinding="{Binding Player.PlayerName}" Width="150"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+
+            <ListView ItemsSource="{Binding MatchDaySquad}" Grid.Column="2" Margin="20 0 32 0">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Player" DisplayMemberBinding="{Binding PlayerName}" Width="100"/>
+                        <GridViewColumn Header="Position" DisplayMemberBinding="{Binding Position}" Width="100"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
+
+        <Button Grid.Row="2" HorizontalAlignment="Center" Command="{Binding NavigateBackCommand}" Content="Back" Width="150" Height="50" Margin=" 20 40 0 0"  />
+
+    </Grid>
+</UserControl>

@@ -1,0 +1,292 @@
+﻿<UserControl x:Class="SportsAnalysisSystem.Views.StatsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SportsAnalysisSystem.Views" xmlns:components="clr-namespace:SportsAnalysisSystem.Components"
+             mc:Ignorable="d"
+             Background="LightGray"
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <Grid>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <components:NavigationBar Grid.Row="0" DataContext="{Binding NavigationBarViewModel}"/>
+        
+        <Grid Grid.Row="1">
+            <TextBlock Text="Holbrook Olympic FC" FontSize="50" Margin="20 0 0 0" />
+        </Grid>
+        
+        <Grid Grid.Row="2">
+            
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+            
+            <Grid Grid.Column="0" Margin="5 40 0 0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" Text="{Binding StringFormat='Games Played: {0}', Path=GamesPlayed}" FontSize="20" />
+                <TextBlock Grid.Row="1" Text="{Binding StringFormat='Won: {0}', Path=GamesWon}" FontSize="20" />
+                <TextBlock Grid.Row="2" Text="{Binding StringFormat='Drawn: {0}', Path=GamesLost}" FontSize="20" />
+                <TextBlock Grid.Row="3" Text="{Binding StringFormat='Lost: {0}', Path=GamesDrawn}" FontSize="20" />
+                <TextBlock Grid.Row="4" Text="{Binding StringFormat='Goals Conceded: {0}', Path=GoalsConceded}" FontSize="20" />
+                <TextBlock Grid.Row="5" Text="{Binding StringFormat='Goals Per Game: {0}', Path=GoalsPerGame}" FontSize="20"/>
+                <TextBlock Grid.Row="6" Text="{Binding StringFormat='Win Loss Ratio: {0}%', Path=WinLossRatio}" FontSize="20" />
+            </Grid>
+            <Grid Grid.Column="1" Margin="0 0 0 0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                
+                <Grid Grid.Row="0" Margin="0 0 0 0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <Grid Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Text="Top Goals" FontSize="20" Grid.Row="0"/>
+
+                        <ListView ItemsSource="{Binding TopGoalScorers}" Grid.Row="1" Height="100" Width="175">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Player" Width="100">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Padding="0 0 20 0" Text="{Binding PlayerName}"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+
+                                    <GridViewColumn Header="Goals" Width="40">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Padding="0 0 20 0" Text="{Binding Goals}"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </Grid>
+                    
+                    <Grid Grid.Column="1" Margin="20,0,20,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Text="Top Assists" FontSize="20" Grid.Row="0" />
+
+                        <ListView ItemsSource="{Binding TopAssisters}" Grid.Row="1" Height="100" Width="175">
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Player" Width="100">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Padding="0 0 20 0" Text="{Binding PlayerName}"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+
+                                    <GridViewColumn Header="Assists">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Padding="0 0 20 0" Text="{Binding Assists}"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </Grid>
+
+                    <Grid Grid.Column="2" Margin="0,0,0,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Text="Top Goals + Assists" FontSize="20" Grid.Row="0" />
+
+                        <ListView ItemsSource="{Binding TopGoalsAndAssists}" Grid.Row="1" Height="100" Width="175">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Player" Width="100">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Padding="0 0 0 0" Text="{Binding PlayerName}"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+
+                                    <GridViewColumn Header="G + A">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Padding="0 0 0 0" Text="{Binding GoalsAndAssists}"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </Grid>
+                </Grid>
+
+                <Grid Grid.Row="1" Margin="0 20 0 0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Text="Top Yellow Cards" FontSize="20" Grid.Row="0" />
+
+                        <ListView ItemsSource="{Binding TopYellowCards}" Grid.Row="1" Height="100" Width="175">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Player" Width="100">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Padding="0 0 20 0" Text="{Binding PlayerName}"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+
+                                    <GridViewColumn Header="Yellows" Width="45">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Padding="0 0 20 0" Text="{Binding YellowCards}"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </Grid>
+
+                    <Grid Grid.Column="1" Margin="20,0,20,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Text="Top Red Cards" FontSize="20" Grid.Row="0" Margin="0 0 0 0"/>
+
+                        <ListView ItemsSource="{Binding TopRedCards}" Grid.Row="1" Height="100" Width="175">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Player" Width="100">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Padding="0 0 20 0" Text="{Binding PlayerName}"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+
+                                    <GridViewColumn Header="Reds" Width="45">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Padding="0 0 20 0" Text="{Binding RedCards}"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </Grid>
+
+                    <Grid Grid.Column="2" Margin="0 0 0 0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Text="Top MoTMs" FontSize="20" Grid.Row="0" Margin="0 0 0 0"/>
+
+                        <ListView ItemsSource="{Binding TopManOfTheMatches}" Grid.Row="1" Margin="0,0,0,0" Height="100" Width="175">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Player" Width="100">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Padding="0 0 20 0" Text="{Binding PlayerName}"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+
+                                    <GridViewColumn Header="MoTMs" Width="45">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Padding="0 0 20 0" Text="{Binding MOTMS}"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>
